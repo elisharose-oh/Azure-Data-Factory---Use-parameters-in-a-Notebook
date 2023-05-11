@@ -1,0 +1,23 @@
+https://learn.microsoft.com/en-us/training/modules/run-azure-databricks-notebooks-azure-data-factory/05-notebook-parameters
+
+#Use parameters in a notebook
+
+#You can use parameters to pass variable values to a notebook from the pipeline
+#Parameterization enables greater flexibility than using hard-coded values in the notebook code
+#To define and use parameters in a notebook, use the dbutils.widgets library in your notebook code
+
+#For example, the following Python code defines a variable named folder and assigns a default value of data:
+dbutils.widgets.text("folder", "data")
+
+#To retrieve a parameter value, use the get function, like this:
+folder = dbutils.widgets.get("folder")
+
+#The get function will retrieve the value for the specific parameter that was passed to the notebook.
+#If no such parameter was passed, it will get the default value of the variable you declared previously.
+
+#Passing output values
+
+#In addition to using parameters that can be passed in to a notebook, you can pass values out to the calling application by using the notebook.exit function, as shown here:
+path = "dbfs:/{0}/products.csv".format(folder)
+dbutils.notebook.exit(path)
+
